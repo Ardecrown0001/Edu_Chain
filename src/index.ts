@@ -1,33 +1,16 @@
-import express from 'express';
-import cors from 'cors';
-import dotenv from 'dotenv';
+import app, { PORT } from './api';
 
-// Load environment variables
-dotenv.config();
+// Start the server
+const server = app.listen(PORT, () => {
+  console.log('🚀 EduChain server started successfully');
+});
 
-const app = express();
-const PORT = process.env.PORT || 8000;
-
-// Middleware
-app.use(cors());
-app.use(express.json());
-
-// Routes
-app.get('/', (req, res) => {
-  res.json({
-    message: 'EduChain API - Decentralized Education Platform',
-    version: '1.0.0',
-    status: 'running'
+// Graceful shutdown
+process.on('SIGTERM', () => {
+  console.log('SIGTERM received, shutting down gracefully');
+  server.close(() => {
+    console.log('Process terminated');
   });
 });
 
-app.get('/health', (req, res) => {
-  res.json({ status: 'healthy', timestamp: new Date().toISOString() });
-});
-
-// Start server
-app.listen(PORT, () => {
-  console.log(`🚀 EduChain API server running on port ${PORT}`);
-});
-
-export default app;
+export default server;
