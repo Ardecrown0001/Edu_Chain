@@ -1,6 +1,13 @@
 import request from 'supertest';
 import app from '../api';
 
+// Add Jest globals
+declare const describe: jest.Describe;
+declare const it: jest.It;
+declare const expect: jest.Expect;
+declare const beforeAll: jest.Lifecycle;
+declare const afterAll: jest.Lifecycle;
+
 describe('API Tests', () => {
   it('should return basic info', async () => {
     const response = await request(app)

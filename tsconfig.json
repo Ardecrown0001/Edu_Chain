@@ -23,7 +23,7 @@
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
     "noUncheckedIndexedAccess": false,
-    "types": ["node"]
+    "types": ["node", "jest"]
   },
   "include": [
     "stellar/**/*",
